@@ -4,8 +4,10 @@ import random
 from time import sleep
 import user_actions
 import data_bases
+from pathlib import Path
 
-titles_data_path = '/home/bohdanm/Documents/mini_project_first_semester/sources/author/titles.csv'
+
+titles_data_path = Path('sources/author/titles.csv')
 
 main_df = data_bases.make_proper_titles_data(titles_data_path)
 

@@ -39,7 +39,6 @@ def display(text: str) -> None:
     print()
 
 
-
 def await_user() -> None:
     """
     Wait until user presses Enter.
@@ -173,7 +172,8 @@ def subparagraph(df, criterions: list):
     output = []
     for criter in criterions:
         print()
-        print(f'Choose values to sort in this cathegory: {format_bold(criter)} \n')
+        print(
+            f'Choose values to sort in this cathegory: {format_bold(criter)} \n')
         category_st = set(df[criter].unique())
         print(category_st)
         while True:
@@ -190,4 +190,3 @@ def subparagraph(df, criterions: list):
         print('_______________________________________________________')
 
     return output
-
