@@ -4,10 +4,11 @@ Module documentation
 import os
 import random
 from time import sleep
-
+from pathlib import Path
+PLOT_FILE = Path('docs/plot.txt')  # path to game plot
 BOLD_TEXT = '\033[1m'  # code for bold text formatting
 NORMAL_TEXT = '\033[0m'  # code for normal text formatting
-DISPLAY_DELAY = 0.003  # time delay between characters while displaying them in console
+DISPLAY_DELAY = 0.001  # time delay between characters while displaying them in console
 
 lst = ['Title', 'Name', 'Series title', 'Country of publication', 'Material type',
        'Place of publication', 'Publisher', 'Genre', 'Languages']
@@ -38,6 +39,7 @@ def display(text: str) -> None:
     print()
 
 
+
 def await_user() -> None:
     """
     Wait until user presses Enter.
@@ -53,6 +55,15 @@ def clear_console() -> None:
     """
     #  for WINDOWS (os.name is 'nt') | for MAC and LINUX (os.name is 'posix')
     os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def show_plot() -> None:
+    """
+    Display the plot of the game in the console and
+    clears it after user has pressed any key.
+    """
+    with open(PLOT_FILE, 'r') as plot_file:
+        display(plot_file.read())
 
 
 def random_choice(num_lst, single_or_multiple):
@@ -81,17 +92,18 @@ def choices(lst):
     >>> lst = ['0', '1', '2', '3', '4', '5', '6', '7']
     >>> 
     """
-    # Почистити консоль
-    print('Choose one for writing, you want to get: \n')
+    clear_console()
+    print(format_bold('Choose criteion(s) for filter author`s works: \n'))
     for index, criterion in enumerate(lst):
         print(index, criterion)
     print()
 
 
 def sing_mult():
-    print('Choose type of sort')
+    print(format_bold('Choose type of sort'))
     print('1 - Single choice')
     print('2 - Multiple choice')
+    print()
     while True:
         num = input('Enter type from list above: ')
         if num == '1' or num == '2':
@@ -111,7 +123,8 @@ def return_single_choice():
 
     # criterion = input('Enter number of criterion: ')
     while True:
-        criterion = input(f'Enter criterion (you can write inpur for random criterions): ')
+        criterion = input(
+            f'Enter criterion (you can write inpur for random criterions): ')
         if criterion == 'random':
             return random_choice([0, 1, 2, 3, 4, 5, 6, 7], 1)
         elif criterion not in available_values:
@@ -134,7 +147,8 @@ def return_multiple_choice(available_values=['0', '1', '2', '3', '4', '5', '6', 
     lst = []
     # available_values = ['0', '1', '2', '3', '4', '5', '6', '7']
     while len(lst) < 3:
-        criterion = input(f'Enter criterion (you can write inpur for random criterions): ')
+        criterion = input(
+            f'Enter criterion (you can write inpur for random criterions): ')
         if criterion == 'random':
             return random_choice([0, 1, 2, 3, 4, 5, 6, 7], 2)
         if criterion in available_values:
@@ -158,11 +172,12 @@ def subparagraph(df, criterions: list):
     """
     output = []
     for criter in criterions:
-        print(f'Choose values to sort in this cathegory: {criter} \n')
+        print()
+        print(f'Choose values to sort in this cathegory: {format_bold(criter)} \n')
         category_st = set(df[criter].unique())
         print(category_st)
         while True:
-
+            print()
             value = input('Enter value to sort: ')
             if value == '':
                 break
@@ -176,16 +191,3 @@ def subparagraph(df, criterions: list):
 
     return output
 
-
-# choices(lst)
-# a = return_multiple_choice()
-# print(a)
-lst = ['0', '1', '2', '3', '4', '5', '6', '7']
-
-# print(random_choice(lst, ''))
-# print(return_multiple_choice(['0', '1', '2', '3', '4', '5', '6', '7']))
-
-
-# a = sing_mult()
-
-# print(random_choice([0, 1, 2, 3, 4, 5, 6, 7], a))

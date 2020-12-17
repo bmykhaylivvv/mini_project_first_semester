@@ -18,11 +18,12 @@ def main():
 
     user_actions.clear_console()
 
-    user_actions.display(
-        'Hellooooooooooooooooofhdsfhjsdfksdhfskdjfskdjhfsdjhskdjooooooooooooooooooooooooooooooooooooooooo')
-
+    user_actions.display(user_actions.format_bold(
+        '                                  Christina Georgina Rossetti'))
+    user_actions.display(user_actions.format_bold(
+        '                               (5 December 1830 – 29 December 1894)'))
+    user_actions.show_plot()
     user_actions.await_user()
-
     single_mutiple_value = user_actions.sing_mult()
 
     user_actions.choices(all_criterions)
@@ -35,8 +36,13 @@ def main():
     final_croterions = user_actions.subparagraph(main_df, certain_criterions)
 
     output = data_bases.final_result(main_df, final_croterions)
-
-    return output
+    print()
+    print(user_actions.format_bold(
+        'Here are books which suit your criterions (not more than 10)'))
+    print()
+    final_outp = output[['Name', 'Series title', 'Country of publication', 'Material type',
+                         'Place of publication', 'Publisher', 'Genre', 'Languages']]
+    return final_outp.head(10)
 
 
 if __name__ == "__main__":
