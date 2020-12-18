@@ -7,7 +7,7 @@ from time import sleep
 from pathlib import Path
 from numbers import Number
 import doctest
-PLOT_FILE = Path('docs/plot.txt')  # path to game plot
+PLOT_FILE = Path('/docs/plot.txt')  # path to game plot
 BOLD_TEXT = '\033[1m'  # code for bold text formatting
 NORMAL_TEXT = '\033[0m'  # code for normal text formatting
 DISPLAY_DELAY = 0.001  # time delay between characters while displaying them in console
