@@ -5,6 +5,8 @@ import os
 import random
 from time import sleep
 from pathlib import Path
+from numbers import Number
+import doctest
 PLOT_FILE = Path('docs/plot.txt')  # path to game plot
 BOLD_TEXT = '\033[1m'  # code for bold text formatting
 NORMAL_TEXT = '\033[0m'  # code for normal text formatting
@@ -65,17 +67,22 @@ def show_plot() -> None:
         display(plot_file.read())
 
 
-def random_choice(num_lst, single_or_multiple):
+def random_choice(num_lst: list, single_or_multiple: Number) -> list:
     """
-    Якщо 'single_or_multiple' = 1, то повернеться множина з одним елементон, 
-    при будь-яких інших значення -- повернеться множина з трьох (3) значень
+    Function returns list with 1 random element from lst list, if'single_or_multiple' = 1,
+    function returns list with 3 random elements from lst list, if 'single_or_multiple' != 1.
+    >>> random.seed(1)
+    >>> random_choice([1, 2, 3, 4, 5, 6, 7, 8, 9], 1)
+    {'Country of publication'}
+    >>> len(random_choice([1, 2, 3, 4, 5, 6, 7, 8, 9], 2))
+    3
     """
     lst = ['Name', 'Series title', 'Country of publication', 'Material type',
            'Place of publication', 'Publisher', 'Genre', 'Languages']
 
     if single_or_multiple == 1:
         rand_num = random.choice(num_lst)
-        return {lst[rand_num]}
+        return {lst[rand_num-1]}
 
     rndm_lst = random.sample(num_lst, 3)
     output = {lst[rndm_lst[0]], lst[rndm_lst[1]], lst[rndm_lst[2]]}
@@ -87,9 +94,20 @@ def random_choice(num_lst, single_or_multiple):
 
 def choices(lst):
     """
-    Function return list of available criterions
-    >>> lst = ['0', '1', '2', '3', '4', '5', '6', '7']
-    >>> 
+    Function print list of available criterion with index ahead
+    r>>> choices(['Title', 'Name', 'Series title', 'Country of publication', 'Material type',\
+       'Place of publication', 'Publisher', 'Genre', 'Languages'])
+        Choose criteion(s) for filter author`s works: 
+
+    0 Title
+    1 Name
+    2 Series title
+    3 Country of publication
+    4 Material type
+    5 Place of publication
+    6 Publisher
+    7 Genre
+    8 Languages
     """
     clear_console()
     print(format_bold('Choose criteion(s) for filter author`s works: \n'))
@@ -98,7 +116,12 @@ def choices(lst):
     print()
 
 
-def sing_mult():
+def sing_mult() -> Number:
+    """
+    Function wait while user enter type of sort
+    1 - Single choice
+    2 - Multiple choice
+    """
     print(format_bold('Choose type of sort'))
     print('1 - Single choice')
     print('2 - Multiple choice')
@@ -110,9 +133,10 @@ def sing_mult():
         continue
 
 
-def return_single_choice():
+def return_single_choice() -> list:
     """
-    Documentation
+    Function wait while user enter number of criterion and return list with this (only one) criterion.
+    User can input 'random' and function return list with one random criterion.
     """
 
     lst = ['Name', 'Series title', 'Country of publication', 'Material type',
@@ -123,7 +147,7 @@ def return_single_choice():
     # criterion = input('Enter number of criterion: ')
     while True:
         criterion = input(
-            f'Enter criterion (you can write inpur for random criterions): ')
+            f'Enter criterion (you can write \'random\' for random criterions): ')
         if criterion == 'random':
             return random_choice([0, 1, 2, 3, 4, 5, 6, 7], 1)
         elif criterion not in available_values:
@@ -138,7 +162,8 @@ def return_single_choice():
 
 def return_multiple_choice(available_values=['0', '1', '2', '3', '4', '5', '6', '7'], i=1, lst=[]):
     """
-    Documentation
+    Function wait while user enter number of criterion and return list with these criterions.
+    User can input 'random' and function return random list of criterions.
     """
     criterions_lst = ['Name', 'Series title', 'Country of publication', 'Material type',
                       'Place of publication', 'Publisher', 'Genre', 'Languages']
@@ -166,14 +191,15 @@ def return_multiple_choice(available_values=['0', '1', '2', '3', '4', '5', '6', 
 
 def subparagraph(df, criterions: list):
     """
-    Тут юзеру обов'язково потрібно обрати по чому він хоче сортувати, потім доробимо функціб так, 
-    щоб можна було вибрати по всіх критеріях в множині
+    Function print set with all available choices to sort in choosen criterions.
+    Function returns list of values from criterions.
     """
     output = []
     for criter in criterions:
         print()
         print(
-            f'Choose values to sort in this cathegory: {format_bold(criter)} \n')
+            f'Choose values to sort in this cathegory: {format_bold(criter)}\n')
+        print(format_bold('You can press Enter to skip this choice\n'))
         category_st = set(df[criter].unique())
         print(category_st)
         while True:
@@ -190,3 +216,6 @@ def subparagraph(df, criterions: list):
         print('_______________________________________________________')
 
     return output
+
+
+doctest.testmod()
