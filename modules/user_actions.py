@@ -79,7 +79,7 @@ def show_plot() -> None:
     Display the plot of the game in the console and
     clears it after user has pressed any key.
     """
-    with open(PLOT_FILE, 'r') as plot_file:
+    with open(PLOT_FILE, 'r', encoding='utf-8') as plot_file:
         display(plot_file.read())
 
 

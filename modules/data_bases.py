@@ -10,7 +10,6 @@
 
 import pandas as pd
 import random
-from IPython.display import display, HTML
 
 
 titles_data_path = '/home/bohdanm/Documents/mini_project_first_semester/sources/author/titles.csv'
