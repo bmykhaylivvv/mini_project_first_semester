@@ -3,7 +3,7 @@
 """
 import os
 import pandas as pd
-import random   
+import random
 from time import sleep
 import user_actions
 import data_bases
