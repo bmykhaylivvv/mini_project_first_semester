@@ -1,5 +1,21 @@
-"""
-Module documentation
+"""Module: user_actions for MINI-PROJECT.
+    Functions for interaction with user.  
+
+    Functions
+    ---------
+        format_bold: make text bold
+        display: print a chunk of text in console letter-by-letter with a certain delay
+        await_user: wait until user presses Enter
+        clear_console: clear the console
+        show_plot: show plot in console
+        random_choice: return list with random criterions
+        choices: print all available criterions
+        sing_mult: wait until user choose one of types of sort
+        return_single_choice: return list with one criterion
+        return_multiple_choice: return list with three criterions
+        subparagraph: function returns lis with of values choose by user from certain criterions
+        number_of_books: function gets and returns books number for output 
+        
 """
 import os
 import random
@@ -120,11 +136,11 @@ def sing_mult() -> Number:
     """
     Function wait while user enter type of sort
     1 - Single choice
-    2 - Multiple choice
+    2 - Multiple choice (3 criterions)
     """
     print(format_bold('Choose type of sort'))
     print('1 - Single choice')
-    print('2 - Multiple choice')
+    print('2 - Multiple choice (3 criterions)')
     print()
     while True:
         num = input('Enter type from list above: ')
@@ -216,6 +232,22 @@ def subparagraph(df, criterions: list):
         print('_______________________________________________________')
 
     return output
+
+
+def number_of_books() -> Number:
+    """
+    Function gets number of how many books user wants to get.
+    """
+    while True:
+        books_number = input('How manu books do you want to get? ')
+        try:
+            books_number = int(books_number)
+            assert books_number > 0
+            print()  # new line
+            return books_number
+
+        except (ValueError, AssertionError) as er:
+            continue
 
 
 doctest.testmod()

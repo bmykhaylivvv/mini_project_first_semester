@@ -1,6 +1,9 @@
+"""Module: main for MINI-PROJECT.
+    Main module of the project.  
+"""
 import os
 import pandas as pd
-import random
+import random   
 from time import sleep
 import user_actions
 import data_bases
@@ -40,12 +43,15 @@ def main():
 
     output = data_bases.final_result(main_df, final_croterions)
     print()
-    print(user_actions.format_bold(
-        'Here are books which suit your criterions (not more than 10)'))
-    print()
+
     final_outp = output[['Name', 'Series title', 'Country of publication', 'Material type',
                          'Place of publication', 'Publisher', 'Genre', 'Languages']]
-    return final_outp.head(10)
+
+    books_num = user_actions.number_of_books()
+
+    print(user_actions.format_bold(
+        f'Here are {books_num} books which suit your criterions'), end='\n\n')
+    return final_outp.head(books_num)
 
 
 if __name__ == "__main__":
