@@ -26,7 +26,6 @@ def make_proper_titles_data(titles_data_path):
 
 
 def final_result(df, criterions):
-    # Дописати умову, для пустих списків
     df1 = df
     for crit in criterions:
         # print(i[0], i[1])
