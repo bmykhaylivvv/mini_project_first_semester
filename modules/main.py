@@ -44,13 +44,17 @@ def main():
     output = data_bases.final_result(main_df, final_croterions)
     print()
 
-    final_outp = output[['Name', 'Series title', 'Country of publication', 'Material type',
-                         'Place of publication', 'Publisher', 'Genre', 'Languages']]
+    final_outp = output[['Title', 'Material type', 'Languages', 'Genre',
+                         'Series title', 'Country of publication', 'Publisher', 'Place of publication']]
 
     books_num = user_actions.number_of_books()
 
-    print(user_actions.format_bold(
-        f'Here are {books_num} books which suit your criterions'), end='\n\n')
+    if len(output) >= books_num:
+        print(user_actions.format_bold(
+            f'Here are {books_num} books which suit your criterions'), end='\n\n')
+    else:
+        print(user_actions.format_bold(
+            f'Here are {len(output)} books which suit your criterions'), end='\n\n')
     return final_outp.head(books_num)
 
 

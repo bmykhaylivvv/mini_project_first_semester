@@ -239,7 +239,7 @@ def number_of_books() -> Number:
     Function gets number of how many books user wants to get.
     """
     while True:
-        books_number = input('How manu books do you want to get? ')
+        books_number = input('How many books do you want to get? ')
         try:
             books_number = int(books_number)
             assert books_number > 0
