@@ -1,4 +1,4 @@
-# Book for you you
+# Book for you
 #### Christina Georgina Rossetti
 
 ## Main idea
