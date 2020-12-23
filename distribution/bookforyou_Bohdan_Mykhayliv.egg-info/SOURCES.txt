@@ -1,0 +1,12 @@
+README.md
+setup.py
+book_for_you/__init__.py
+book_for_you/data_bases.py
+book_for_you/main.py
+book_for_you/user_actions.py
+book_for_you/data/plot.txt
+book_for_you/data/titles.csv
+bookforyou_Bohdan_Mykhayliv.egg-info/PKG-INFO
+bookforyou_Bohdan_Mykhayliv.egg-info/SOURCES.txt
+bookforyou_Bohdan_Mykhayliv.egg-info/dependency_links.txt
+bookforyou_Bohdan_Mykhayliv.egg-info/top_level.txt
